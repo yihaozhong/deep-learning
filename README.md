@@ -2,6 +2,8 @@
 
 A learning journey of deep learning
 
+## Module
+
 **Module 1: AI revolution, ML concepts, Introduction to ML tooling**
 
 AI revolution and success factors; ML viewpoints: algorithmic vs. system; ML system and its
@@ -63,3 +65,50 @@ Federated learning, FedAvg; Adversarial training in federated setting
 
 ML model drift; data drift and concept drift; monitoring and drift detection; model retraining;
 Tools for continual learning
+
+## Study Guide
+
+**ML Performance Concepts**
+
+Confusion matrix, accuracy, F1, true positive rate, false positive rate, ROC curve, overfiting, 
+generalization, bias, variance, regularization (L1 and L2), logistic regression, linear separability 
+ 
+**Deep Learning Basics**  
+
+Single and multi-layered feedforward neural networks, activation functions, cross entropy loss, 
+training and inference, forward pass, backpropagation, gradient descent, batch size, learning 
+rate, learning rate decay, early stopping, dropout, batch normalization, momentum, Nesterov 
+momentum,  
+ 
+**ConvoluEonal Neural Networks**
+
+CNN layers, padding, pooling, stride, sparse connections, parameter calculations, compute and 
+memory requirements, receptive field, receptive field equivalence of stacked convolutions, 
+power of small filters, contrastive loss, Siamese networks, pseudo labeling 
+ 
+**Recurrent Neural Networks and Transformers**
+
+RNN and LSTM architectures, parameter calculations, Transformer architecture components, 
+encoder and decoder block architectures, different weight matrices in transformers, concept of 
+query, key, and value, multi-head aNention, aNention calculation 
+ 
+**Hyperparameter Optimization** 
+
+Successive halving, Hyperband algorithm 
+ 
+**Distributed Training**
+
+Data parallelism, Synchronous SGD, Asynchronous SGD, Parameter Server aggregation, straggler 
+problem, stale gradients, Ring all-reduce, scaling efficiency 
+ 
+**Generative Adversarial Networks (GANs)** 
+
+Generator, discriminator, GAN training, GAN loss function 
+ 
+**Federated Learning** 
+
+Federated learning challenges, Federated Averaging algorithm, problem of non-IID data  
+ 
+ 
+ 
+ 
