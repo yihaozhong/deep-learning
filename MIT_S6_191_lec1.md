@@ -157,7 +157,7 @@ while True:
     1.2 **Embedding**: transform indexes into a vector of fixed size
     1.3 Vocabulary: corpus of words
 
-2. Embedding:
+2. **Embedding**:
     2.1 Vocabulary
     2.2 indexing: word to index
     2.3 Embedding: index to fixed sized vector
@@ -166,3 +166,53 @@ while True:
 ### 4. Backpropagation Through Time (BPTT)
 
 1. Tricky to implement: computing the gradient wrt $h_0$ involves many factors of $W_{hh}$ + repeated gradient computation. 
+
+2. exploding gradients: many values > 1, using gradient clipping
+
+3. vanishing gradients, many values < 1
+    3.1 use activation function
+    3.2 weight initialization: initialize weights to identity matrix, initialize bias to be zero
+    3.3 network architecture: use **gates** to selecttively add or remove info with each rcurrent unit (optionally let through information)
+
+4, **LSTM**: forget, store, update, output
+    4.1 maintain a cell state, use gates to control the flow of info 
+        (forget gate get rid of irrelevant information)
+        (Store relevant info from current input)
+        (selectively update cell state)
+        (output gate return a filtered version of the cell state)
+
+### 5. RNN Application & Limits
+
+1. limitations: encoding bottleneck
+    1.1 processed timestamp by timestamp
+    1.2 how to make sure all info are encoded and process
+2. limitations: slow, no parallelization
+3. limitations: Not very long memory, not even LSTM
+
+4. **Desired Capabilities**
+    4.1 Continous stream
+    4.2 Parallelization
+    4.3 Long Memory
+
+5. Can we feed everyting into dense network: no recurrence, no order, no long memory, not scalable?
+
+    5.1 Key idea: identify and attend to what's important
+
+### 6. Attention is All You Need
+> Attending to the most important parts of an input
+1. **Self-Attention**
+    1.1 identify which parts to attend to, extract the features with highest attention (similar to a search problem)
+
+    1.2 Internet search -> **Query (Q)** entered -> search output **Key (k1)**, Key (k2)... how similar is the ke (1,2,3...) to the query -> Extract the **Value (V)** corresponding to the key
+
+2. Learning Self Attention with NN
+    a. Encode position information (in terms of order), position-aware embedding
+    b. Extract query, key, value for search
+        b.1 Positional embedding x linear layer = Output (Query)
+        b.2 Positional embedding x linear layer (different layer) = Output (Key)
+        b.3 Positional embedding x linear layer (different layer)= Output (Value)
+
+    c. Compute attention weight (score), compute pairwise similarity between each query and key -- cosine similarity -- dot product and scale -- softmax$(\frac{Q  K^T}{scaling})$ = attention weight
+
+    d. extract features with high attention: *attention score x value* = output --> softmax$(\frac{Q  K^T}{scaling})$ *matmul* V = A(Q, K, V)
+
