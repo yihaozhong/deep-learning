@@ -104,5 +104,65 @@ while True:
 5. **Early stopping**: stop training before we have a chance of overfitting
 
 
+## Lecture 2: Recurrent Neural Networks, Transformers, and Attention
 
+### 1. Deep Sequential Model
 
+1. Text, Words, etc
+2. One to one: binary classfication (student -> pass or not)
+3. Many to one: sentiment classfication
+4. One to many: image captioning, text generation
+5. Many to many: machine translation, forecasting, music generation
+
+### 2. Neurons with Recurrence
+> How we links neurons with different timestamps via replica
+
+1. feed-forward network revisited
+    1.1 handling individual time steps
+    1.2 try to handle input coming in with different time
+    1.3 $y_t = f(x_t)$ at a time $t$
+
+2. Neurons with Recurrence
+    2.1 define $h_t$ as past memory, and $y_t = f(x_t, h_{t-1})$ at a time $t$
+    2.2 recurrent cell -> loop that fed back into the neurons
+    2.3 temporal cyclic dependency
+
+3. **RNNs**
+    3.1 RNN have a state, $h_t$, updated at each time step as a sequence is processed
+    3.2 apply a recurrence relation at every time stamp
+    3.3 cell state $h_t = f_w(x_t, h_{t-1})$ 
+    3.4 same function and set of param are used at every timestep
+    3.5 generate output prediction + a update hidden state
+
+4. RNN State Update and output
+    4.1 Input Vector $x_t$
+    4.2 Update Hidden State, $h_t = tanh(W^T_h h_{t-1} + W^T_x x_t)$
+    4.3 Output Vector $y_t = W^T_h h_t$
+
+5. Three weight: $W_{xh}$ that update the hidden state from input dim, $W_{hh}$ that update from previous steps to next RNN unit, $W_{hy}$ that update the output dim
+
+6. RNNs for Sequence model: one to one, many to one, one to many, many to many
+
+7. To model seq, we **need to**:
+    7.1 handle variable-length seq
+    7.2 track long term dependencies
+    7.3 mantain information about order
+    7.4 share param across seq
+
+### 3. A sequence modeling problem: predict the next word
+>Given some words, predict the next word
+
+1. First step: represent the English language to a NN
+    1.1 require numerical inputs
+    1.2 **Embedding**: transform indexes into a vector of fixed size
+    1.3 Vocabulary: corpus of words
+
+2. Embedding:
+    2.1 Vocabulary
+    2.2 indexing: word to index
+    2.3 Embedding: index to fixed sized vector
+        a. One-hot embedding "cat" = [0,1,0,0,0,0] , cat = 1 (index)
+
+### 4. Backpropagation Through Time (BPTT)
+
+1. Tricky to implement: computing the gradient wrt $h_0$ involves many factors of $W_{hh}$ + repeated gradient computation. 
